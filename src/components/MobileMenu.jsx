@@ -1,55 +1,60 @@
+const NAV_LINKS = [
+  { href: "#home", label: "Início" },
+  { href: "#about", label: "Sobre" },
+  { href: "#experience", label: "Experiência" },
+  { href: "#projects", label: "Projetos" },
+  { href: "#contact", label: "Contato" },
+];
+
 export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
   return (
     <div
-      className={`fixed top-0 left-0 w-full bg-[rgba(10,10,10,0.8)] z-40 flex flex-col items-center justify-center transition-all duration-300 ease-in-out ${
-        menuOpen
-          ? "h-screen opacity-100 pointer-events-auto"
-          : "h-0 opacity-0 pointer-events-none"
-      }`}
+      className="fixed inset-0 z-40 flex flex-col items-center justify-center transition-all duration-300 ease-in-out"
+      style={{
+        backgroundColor: "rgba(12, 11, 10, 0.97)",
+        backdropFilter: "blur(20px)",
+        pointerEvents: menuOpen ? "auto" : "none",
+        opacity: menuOpen ? 1 : 0,
+        transform: menuOpen ? "translateY(0)" : "translateY(-8px)",
+      }}
     >
+      {/* Close button */}
       <button
         onClick={() => setMenuOpen(false)}
-        className="absolute top-6 right-6 text-white text-3xl focus:outline-none cursor-pointer"
-        aria-label="Close Menu"
+        className="absolute font-mono focus:outline-none"
+        style={{
+          top: "calc(28px + 16px)",
+          right: 24,
+          color: "var(--text-tertiary)",
+          fontSize: "1.25rem",
+        }}
+        aria-label="Fechar menu"
       >
-        &times;
+        ×
       </button>
 
-      <a
-        href="#home"
-        onClick={() => setMenuOpen(false)}
-        className={`text-2xl font-semibold text-white my-4 transform transition-transform duration-300
-                    ${
-                      menuOpen
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-5"
-                    }        
-            `}
-      >
-        Início
-      </a>
-      <a
-        href="#about"
-        onClick={() => setMenuOpen(false)}
-        className={`text-2xl font-semibold text-white my-4 transform transition-transform duration-300
-            ${
-              menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-            }        
-    `}
-      >
-        Sobre
-      </a>
-      <a
-        href="#projects"
-        onClick={() => setMenuOpen(false)}
-        className={`text-2xl font-semibold text-white my-4 transform transition-transform duration-300
-            ${
-              menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-            }        
-    `}
-      >
-        Projetos
-      </a>
+      {/* Links */}
+      <nav className="flex flex-col items-center gap-8">
+        {NAV_LINKS.map(({ href, label }, i) => (
+          <a
+            key={href}
+            href={href}
+            onClick={() => setMenuOpen(false)}
+            className="font-display italic transition-all duration-200"
+            style={{
+              fontSize: "clamp(2rem, 8vw, 3rem)",
+              color: "var(--text-primary)",
+              opacity: menuOpen ? 1 : 0,
+              transform: menuOpen ? "translateY(0)" : "translateY(12px)",
+              transitionDelay: `${i * 50}ms`,
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = "var(--accent)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = "var(--text-primary)"; }}
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
     </div>
   );
 };

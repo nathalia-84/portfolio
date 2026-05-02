@@ -1,39 +1,218 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────
+   DESIGN TOKENS — "Engineer's Editorial"
+   Warm-dark palette · amber accent · serif/mono editorial pairing
+   ───────────────────────────────────────────────────────── */
+
+@theme {
+  --color-bg-base: #0c0b0a;
+  --color-bg-surface: #15110f;
+  --color-bg-elevated: #1d1815;
+  --color-border-subtle: #2a2420;
+  --color-border-strong: #3d352e;
+  --color-text-primary: #f3ede1;
+  --color-text-secondary: #9a8f80;
+  --color-text-tertiary: #5b524a;
+  --color-accent: #e8c547;
+  --color-accent-cool: #7aaab9;
+  --color-signal-live: #a3b886;
+
+  --font-display: "Instrument Serif", "Times New Roman", serif;
+  --font-body: "Manrope", "Helvetica Neue", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --bg-base: #0c0b0a;
+  --bg-surface: #15110f;
+  --bg-elevated: #1d1815;
+  --border-subtle: #2a2420;
+  --border-strong: #3d352e;
+  --text-primary: #f3ede1;
+  --text-secondary: #9a8f80;
+  --text-tertiary: #5b524a;
+  --accent: #e8c547;
+  --accent-cool: #7aaab9;
+  --signal-live: #a3b886;
+  --glow-warm: rgba(232, 197, 71, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
-  font-family: "Space Grotesk", sans-serif;
-  background: #0a0a0a;
-  color: #f3f4f6;
+  font-family: var(--font-body);
+  font-feature-settings: "ss01", "cv11";
+  font-optical-sizing: auto;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% 0%, var(--glow-warm), transparent 70%),
+    url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.93 0 0 0 0 0.88 0 0 0 0.18 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: auto, 200px 200px;
+  background-attachment: fixed;
+}
+
+/* ─────────────────────────────────────────────────────────
+   TYPOGRAPHY UTILITIES
+   ───────────────────────────────────────────────────────── */
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-meta {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: var(--bg-base);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+
+/* ─────────────────────────────────────────────────────────
+   ANIMATIONS
+   ───────────────────────────────────────────────────────── */
 
 @layer utilities {
   @keyframes blink {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
   }
 
   .animate-blink {
-    animation: blink 0.8s step-end infinite;
+    animation: blink 0.9s step-end infinite;
+  }
+
+  @keyframes pulse-signal {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 rgba(163, 184, 134, 0.4);
+    }
+    50% {
+      opacity: 0.55;
+      box-shadow: 0 0 0 4px rgba(163, 184, 134, 0);
+    }
+  }
+
+  .animate-pulse-signal {
+    animation: pulse-signal 2.4s ease-in-out infinite;
+  }
+
+  @keyframes draw-underline {
+    from { stroke-dashoffset: var(--dash-length, 400); }
+    to { stroke-dashoffset: 0; }
+  }
+
+  .animate-draw-underline {
+    stroke-dasharray: var(--dash-length, 400);
+    stroke-dashoffset: var(--dash-length, 400);
+    animation: draw-underline 0.7s 0.6s ease-out forwards;
   }
 
   @keyframes loading {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(250%);
-    }
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(250%); }
   }
 
   .animate-loading-bar {
-    animation: loading 0.8s ease infinite;
+    animation: loading 0.9s ease infinite;
   }
+
+  @keyframes scroll-cue {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(4px); opacity: 1; }
+  }
+
+  .animate-scroll-cue {
+    animation: scroll-cue 2s ease-in-out infinite;
+  }
+
+  /* Hover-underline (CSS-only, animated) */
+  .hover-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 280ms ease;
+    text-decoration: none;
+  }
+  .hover-underline:hover {
+    background-size: 100% 1px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   COMPONENT BASE — language dot for project cards
+   ───────────────────────────────────────────────────────── */
+
+.lang-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Photo treatment for About */
+.about-portrait {
+  filter: contrast(1.02) saturate(0.92);
+}
+.about-portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--bg-base);
+  mix-blend-mode: multiply;
+  opacity: 0.18;
+  pointer-events: none;
 }

@@ -1,142 +1,349 @@
+import { useState } from "react";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import projects from "../../data/pinnedRepos.json";
+
+const [featured, ...secondary] = projects.length > 0 ? projects : [];
+
 export const Projects = () => {
+  if (projects.length === 0) {
+    return (
+      <section
+        id="projects"
+        className="py-24"
+        style={{ borderTop: "1px solid var(--border-subtle)" }}
+      >
+        <div className="max-w-6xl mx-auto px-6">
+          <p className="text-meta" style={{ color: "var(--text-tertiary)" }}>
+            Atualizando projetos...
+          </p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       id="projects"
-      className="min-h-screen flex items-center justify-center py-20"
+      className="py-24 md:py-32"
+      style={{ borderTop: "1px solid var(--border-subtle)" }}
     >
-      <div className="max-w-5xl mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent text-center">
-          Projetos
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Projeto 1 */}
-          <div className="p-6 rounded-xl border border-white/10 hover:-translate-y-1 hover:border-pink-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)] transition">
-            <h3 className="text-xl font-bold mb-2">
-              API REST para Sistema de Supermercado
-            </h3>
-            <p className="text-gray-400 mb-4">
-              API REST para gerenciar um sistema de supermercado, com operações
-              CRUD para produtos, clientes e pedidos. Desenvolvida para a
-              disciplina de Desenvolvimento Web II (BTI - UFRN).
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Header */}
+        <div className="flex items-end justify-between mb-12">
+          <div>
+            <p className="text-meta mb-3" style={{ color: "var(--text-tertiary)" }}>
+              // projetos
             </p>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {["Java", "Spring Boot", "Maven", "MySQL"].map((tech, key) => (
-                <span
-                  key={key}
-                  className="bg-blue-500/10 text-pink-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-            <div className="flex justify-between items-center">
-              <a
-                href="https://github.com/nathalia-84/SistemaMercado"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-pink-400 hover:text-pink-300 transition-colors my-4"
-              >
-                Visualizar Projeto →
-              </a>
-            </div>
+            <h2
+              className="font-display italic"
+              style={{
+                fontSize: "clamp(1.75rem, 4vw, 3rem)",
+                color: "var(--text-primary)",
+              }}
+            >
+              Trabalhos <em>recentes</em>.
+            </h2>
           </div>
-          {/* Projeto 2 */}
-          <div className="p-6 rounded-xl border border-white/10 hover:-translate-y-1 hover:border-pink-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)] transition">
-            <h3 className="text-xl font-bold mb-2">
-              Jogo da Velha com IA (Algoritmo Minimax)
-            </h3>
-            <p className="text-gray-400 mb-4">
-              Jogo da Velha com interface responsiva onde o jogador enfrenta uma
-              IA. O oponente é controlado pelo algoritmo Minimax, que calcula a
-              melhor jogada possível a cada turno, criando um desafio imbatível.
-            </p>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {["React", "JavaScript", "CSS"].map((tech, key) => (
-                <span
-                  key={key}
-                  className="bg-blue-500/10 text-pink-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-            <div className="flex justify-between items-center">
-              <a
-                href="https://github.com/nathalia-84/TicTacToe"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-pink-400 hover:text-pink-300 transition-colors my-4"
-              >
-                Visualizar Projeto →
-              </a>
-            </div>
+          <a
+            href="https://github.com/nathalia-84"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-meta hidden md:inline-flex items-center gap-2 hover-underline"
+            style={{ color: "var(--text-tertiary)" }}
+          >
+            → ver todos no GitHub
+          </a>
+        </div>
+
+        {/* Featured project */}
+        {featured && <FeaturedCard project={featured} />}
+
+        {/* Secondary grid */}
+        {secondary.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 mt-0">
+            {secondary.map((project) => (
+              <SecondaryCard key={project.name} project={project} />
+            ))}
           </div>
-          {/* Projeto 3 */}
-          <div className="p-6 rounded-xl border border-white/10 hover:-translate-y-1 hover:border-pink-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)] transition">
-            <h3 className="text-xl font-bold mb-2">
-              Loja Virtual (E-commerce) com Gerenciamento de Estado
-            </h3>
-            <p className="text-gray-400 mb-4">
-              Front-end de um e-commerce com funcionalidades de vitrine de
-              produtos e carrinho de compras.
-            </p>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {["React", "JavaScript", "Context API", "Bootstrap"].map(
-                (tech, key) => (
-                  <span
-                    key={key}
-                    className="bg-blue-500/10 text-pink-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all"
-                  >
-                    {tech}
-                  </span>
-                )
-              )}
-            </div>
-            <div className="flex justify-between items-center">
-              <a
-                href="https://github.com/nathalia-84/react-ecommerce"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-pink-400 hover:text-pink-300 transition-colors my-4"
-              >
-                Visualizar Projeto →
-              </a>
-            </div>
-          </div>
-          {/* Projeto 4 */}
-          <div className="p-6 rounded-xl border border-white/10 hover:-translate-y-1 hover:border-pink-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)] transition">
-            <h3 className="text-xl font-bold mb-2">
-              Plataforma de Busca de Filmes
-            </h3>
-            <p className="text-gray-400 mb-4">
-              Aplicação web para buscar e consultar filmes utilizando a API do
-              The Movie Database (TMDB).
-            </p>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {["React", "TypeScript", "Tailwind CSS", "TMDB API"].map(
-                (tech, key) => (
-                  <span
-                    key={key}
-                    className="bg-blue-500/10 text-pink-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all"
-                  >
-                    {tech}
-                  </span>
-                )
-              )}
-            </div>
-            <div className="flex justify-between items-center">
-              <a
-                href="https://github.com/nathalia-84/movie-app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-pink-400 hover:text-pink-300 transition-colors my-4"
-              >
-                Visualizar Projeto →
-              </a>
-            </div>
-          </div>
+        )}
+
+        {/* Mobile — all repos link */}
+        <div className="mt-8 md:hidden">
+          <a
+            href="https://github.com/nathalia-84"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-meta hover-underline"
+            style={{ color: "var(--text-tertiary)" }}
+          >
+            → ver todos no GitHub
+          </a>
         </div>
       </div>
     </section>
+  );
+};
+
+const FeaturedCard = ({ project }) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      className="grid grid-cols-1 lg:grid-cols-12 transition-all duration-200"
+      style={{
+        border: `1px solid ${hovered ? "var(--border-strong)" : "var(--border-subtle)"}`,
+        marginBottom: -1,
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Left — metadata */}
+      <div className="lg:col-span-7 p-8 flex flex-col gap-5">
+        <div className="flex items-center gap-2">
+          {project.primaryLanguage && (
+            <span
+              className="lang-dot"
+              style={{ background: project.primaryLanguage.color }}
+            />
+          )}
+          <span className="text-meta" style={{ color: "var(--text-tertiary)" }}>
+            featured
+          </span>
+        </div>
+
+        <div>
+          <h3
+            className="font-display italic leading-tight"
+            style={{
+              fontSize: "clamp(1.5rem, 3.5vw, 2.75rem)",
+              color: "var(--text-primary)",
+            }}
+          >
+            {project.name.replace(/-/g, " ")}
+          </h3>
+          {project.primaryLanguage && (
+            <span
+              className="font-mono text-xs"
+              style={{ color: "var(--text-tertiary)" }}
+            >
+              {project.primaryLanguage.name}
+            </span>
+          )}
+        </div>
+
+        <p
+          className="font-body leading-relaxed"
+          style={{
+            fontSize: "clamp(0.9rem, 1.3vw, 1.0625rem)",
+            color: "var(--text-secondary)",
+            flex: 1,
+          }}
+        >
+          {project.description}
+        </p>
+
+        {/* Topics */}
+        <div className="flex flex-wrap gap-2">
+          {project.topics.slice(0, 6).map((topic) => (
+            <span
+              key={topic}
+              className="font-mono text-xs px-2 py-0.5"
+              style={{
+                color: "var(--text-tertiary)",
+                border: "1px solid var(--border-subtle)",
+                fontSize: "0.7rem",
+              }}
+            >
+              {topic}
+            </span>
+          ))}
+        </div>
+
+        {/* Links */}
+        <div className="flex items-center gap-5 pt-2" style={{ borderTop: "1px solid var(--border-subtle)" }}>
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-mono text-xs hover-underline transition-colors"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            <FaGithub size={13} />
+            GitHub
+          </a>
+          {project.homepageUrl && (
+            <a
+              href={project.homepageUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-mono text-xs hover-underline transition-colors"
+              style={{ color: "var(--accent)" }}
+            >
+              <FaExternalLinkAlt size={11} />
+              Live
+            </a>
+          )}
+          {project.stargazerCount > 0 && (
+            <span
+              className="font-mono text-xs ml-auto"
+              style={{ color: "var(--text-tertiary)" }}
+            >
+              ★ {project.stargazerCount}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Right — code preview */}
+      <div
+        className="lg:col-span-5 relative overflow-hidden"
+        style={{
+          backgroundColor: "var(--bg-surface)",
+          borderLeft: "1px solid var(--border-subtle)",
+          minHeight: 280,
+        }}
+      >
+        {project.readmePreview ? (
+          <CodePreview text={project.readmePreview} />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <FaGithub
+              size={48}
+              style={{ color: "var(--border-strong)", opacity: 0.5 }}
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const CodePreview = ({ text }) => {
+  const lines = text.split("\n").slice(0, 14);
+  return (
+    <div className="relative h-full w-full overflow-hidden">
+      <pre
+        className="font-mono p-6 text-xs leading-6 h-full"
+        style={{ color: "var(--text-tertiary)", whiteSpace: "pre-wrap" }}
+      >
+        {lines.map((line, i) => (
+          <span key={i} className="block">
+            {line || " "}
+          </span>
+        ))}
+      </pre>
+      {/* Fade out overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent 40%, var(--bg-surface) 100%), linear-gradient(to right, transparent 60%, var(--bg-surface) 100%)",
+        }}
+      />
+    </div>
+  );
+};
+
+const SecondaryCard = ({ project }) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      className="p-6 flex flex-col gap-4 transition-all duration-200 cursor-default"
+      style={{
+        border: `1px solid ${hovered ? "var(--border-strong)" : "var(--border-subtle)"}`,
+        backgroundColor: hovered ? "var(--bg-surface)" : "transparent",
+        marginTop: -1,
+        marginLeft: -1,
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Language dot + name */}
+      <div>
+        <div className="flex items-center gap-2 mb-2">
+          {project.primaryLanguage && (
+            <span
+              className="lang-dot"
+              style={{ background: project.primaryLanguage.color }}
+            />
+          )}
+          {project.primaryLanguage && (
+            <span className="font-mono text-xs" style={{ color: "var(--text-tertiary)" }}>
+              {project.primaryLanguage.name}
+            </span>
+          )}
+        </div>
+        <h3
+          className="font-mono font-medium"
+          style={{
+            fontSize: "1.0625rem",
+            color: "var(--text-primary)",
+            lineHeight: 1.3,
+          }}
+        >
+          {project.name.replace(/-/g, " ")}
+        </h3>
+      </div>
+
+      {/* Description */}
+      <p
+        className="font-body leading-relaxed flex-1"
+        style={{
+          fontSize: "0.875rem",
+          color: "var(--text-tertiary)",
+          display: "-webkit-box",
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden",
+        }}
+      >
+        {project.description}
+      </p>
+
+      {/* Topics */}
+      <div className="flex flex-wrap gap-1.5">
+        {project.topics.slice(0, 3).map((topic) => (
+          <span
+            key={topic}
+            className="font-mono"
+            style={{
+              fontSize: "0.65rem",
+              color: "var(--text-tertiary)",
+              border: "1px solid var(--border-subtle)",
+              padding: "1px 6px",
+            }}
+          >
+            {topic}
+          </span>
+        ))}
+      </div>
+
+      {/* Links */}
+      <div className="flex items-center gap-4">
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 font-mono text-xs hover-underline"
+          style={{ color: "var(--text-secondary)" }}
+        >
+          <FaGithub size={12} />
+          GitHub
+        </a>
+        {project.homepageUrl && (
+          <a
+            href={project.homepageUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 font-mono text-xs hover-underline"
+            style={{ color: "var(--accent)" }}
+          >
+            <FaExternalLinkAlt size={10} />
+            Live
+          </a>
+        )}
+      </div>
+    </div>
   );
 };
