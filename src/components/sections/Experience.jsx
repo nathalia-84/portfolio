@@ -2,14 +2,14 @@ const EXPERIENCES = [
   {
     period: "FEV 2026 — ATUAL",
     year: "2026",
-    company: "IMD/UFRN × Dell",
+    company: "IMD/UFRN",
     role: "Pesquisadora & Desenvolvedora",
     description:
       "Pesquisa aplicada em IA e Engenharia de Software com foco em sistemas multiagentes com LLMs. Desenvolvimento em FastAPI, OpenAI SDK e Langfuse para observabilidade e avaliação contínua de pipelines de IA.",
     achievements: [
       "Arquitetura de orquestração multiagente com OpenAI SDK",
       "Pipeline de avaliação e detecção de regressões com Langfuse",
-      "Pesquisa em parceria com laboratório de inovação da Dell",
+      "Pesquisa aplicada em parceria com laboratório de inovação",
     ],
     stack: ["Python", "FastAPI", "OpenAI SDK", "Langfuse", "LLMs"],
   },

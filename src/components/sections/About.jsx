@@ -141,7 +141,7 @@ export const About = () => {
                   sistemas multiagentes
                 </em>{" "}
                 com LLMs — FastAPI, OpenAI SDK e Langfuse — em projeto de pesquisa
-                em parceria com a Dell. Formação prévia como Scrum Master agrega
+                no IMD/UFRN. Formação prévia como Scrum Master agrega
                 visão de produto e comunicação técnica. Inglês avançado.
               </p>
             </div>
