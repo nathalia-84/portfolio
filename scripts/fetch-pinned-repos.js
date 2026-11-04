@@ -129,9 +129,13 @@ async function main() {
   return 0;
 }
 
+// Usa process.exitCode em vez de process.exit(): encerrar à força enquanto o
+// fetch ainda fecha conexões derruba o Node no Windows (assertion em libuv).
 main()
-  .then((code) => process.exit(code ?? 0))
+  .then((code) => {
+    process.exitCode = code ?? 0;
+  })
   .catch((err) => {
     console.warn("[fetch-pinned-repos] unexpected error:", err.message);
-    process.exit(0);
+    process.exitCode = 0;
   });
