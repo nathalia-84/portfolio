@@ -1,51 +1,48 @@
 [
   {
-    "name": "SistemaMercado",
-    "description": "Sistema de API de mercado, desenvolvido com Spring Boot para a disciplina de Desenvolvimento Web II - BTI - UFRN",
-    "url": "https://github.com/nathalia-84/SistemaMercado",
+    "name": "deepeval_agent_metrics",
+    "description": "This project focuses on building an AI-powered code review agent and evaluating its behavior using DeepEval metrics.",
+    "url": "https://github.com/nathalia-84/deepeval_agent_metrics",
     "homepageUrl": null,
     "primaryLanguage": {
-      "name": "Java",
-      "color": "#b07219"
-    },
-    "topics": [
-      "java",
-      "spring-boot"
-    ],
-    "stargazerCount": 0,
-    "forkCount": 0,
-    "updatedAt": "2025-05-15T13:57:58Z",
-    "readmePreview": "# SistemaMercado: Sistema Backend para Gerenciamento de Estoque e Pedidos\n\n## Visão Geral\n\nO **SistemaMercado** é uma aplicação backend desenvolvida em **Java** utilizando o framework **Spring Boot**. Ele simula um sistema de gestão de supermercado com foco no gerenciamento de clientes, produtos e pedidos. O sistema é projetado com uma arquitetura limpa que separa responsabilidades entre diferentes camadas, garantindo escalabilidade, facilidade de manutenção e aderência às boas práticas de desenvolvimento.\n\n## Estrutura do Projeto\n\nA arquitetura do projeto segue uma abordagem modular, organizada em pacotes, cada um responsável por uma funcionalidade específica:\n\n```\nbr.ufrn.imd.sistemamercado"
-  },
-  {
-    "name": "movie-app",
-    "description": "Website de pesquisa de filmes feito com React, Tailwind e Appwrite, utilizando a API The Movie Database (TMDB)",
-    "url": "https://github.com/nathalia-84/movie-app",
-    "homepageUrl": "https://movie-app-black-tau.vercel.app",
-    "primaryLanguage": {
-      "name": "JavaScript",
-      "color": "#f1e05a"
+      "name": "Python",
+      "color": "#3572A5"
     },
     "topics": [],
     "stargazerCount": 0,
     "forkCount": 0,
-    "updatedAt": "2025-07-20T14:57:47Z",
-    "readmePreview": "# React + Vite\n\nThis template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.\n\nCurrently, two official plugins are available:\n\n- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh\n- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh\n\n## Expanding the ESLint configuration\n\nIf you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project."
+    "updatedAt": "2026-09-26T00:33:39Z",
+    "readmePreview": "# DeepEval Agent Metrics\n\nThis project focuses on building an AI-powered code review agent and evaluating its behavior using [DeepEval](https://github.com/confident-ai/deepeval) metrics. \n\nCurrently, both the code review agent and its evaluation pipeline using DeepEval have been implemented.\n\n## Code Review Agent\n\nThe agent is built as a FastAPI service, leveraging the `gpt-6-luna` model to analyze Python code or diffs.\n\n### Features\n* **FastAPI Endpoint**: Exposes a `/review` POST endpoint to receive Python code."
   },
   {
-    "name": "react-ecommerce",
-    "description": "Projeto realizado na aula de gerenciamento de estados com Context API",
-    "url": "https://github.com/nathalia-84/react-ecommerce",
+    "name": "hyper_reader",
+    "description": null,
+    "url": "https://github.com/nathalia-84/hyper_reader",
     "homepageUrl": null,
     "primaryLanguage": {
-      "name": "JavaScript",
-      "color": "#f1e05a"
+      "name": "Dart",
+      "color": "#00B4AB"
     },
     "topics": [],
     "stargazerCount": 0,
     "forkCount": 0,
-    "updatedAt": "2025-07-20T14:44:16Z",
-    "readmePreview": "![Meteora](thumbnail.png)\n\n# Meteora - E-commerce de Moda\n\nO Meteora é um projeto de e-commerce em fase de desenvolvimento inicial. Este README fornece informações sobre o projeto, suas funcionalidades e como executá-lo em seu ambiente local.\n\n![GIF da aplicação em execução](meteora-app.gif)\n\n## 🔨 Funcionalidades do projeto\n\nNeste estágio inicial de desenvolvimento, o Meteora possui as seguintes funcionalidades:\n"
+    "updatedAt": "2026-11-02T16:23:07Z",
+    "readmePreview": ""
+  },
+  {
+    "name": "workout-api",
+    "description": "Workout API built with FastAPI and MongoDB",
+    "url": "https://github.com/nathalia-84/workout-api",
+    "homepageUrl": null,
+    "primaryLanguage": {
+      "name": "Python",
+      "color": "#3572A5"
+    },
+    "topics": [],
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "updatedAt": "2026-11-04T14:41:41Z",
+    "readmePreview": "# Workout API\n\nAPI em FastAPI com MongoDB.\n\n## Requisitos\n\n- Python 3.12+\n- (Opcional) Docker + Docker Compose\n\n## Configuração\n\nCrie o arquivo `.env` a partir do exemplo:"
   },
   {
     "name": "TicTacToe",
